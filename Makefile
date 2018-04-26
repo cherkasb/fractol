@@ -6,7 +6,7 @@
 #    By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/24 17:06:27 by bcherkas          #+#    #+#              #
-#    Updated: 2018/04/25 19:40:41 by bcherkas         ###   ########.fr        #
+#    Updated: 2018/04/26 19:08:01 by bcherkas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,14 @@ NAME=fractol
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(MLX) -o $@ $^
+	@$(CC) -g $(MLX) -o $@ $^
 	@echo "all done"
 
 %.o: %.c
 	@$(CC) -c -o $@ $<
+
+d: $(SRCS) libft/*.c
+	$(CC) $(MLX) -g $^ -o test
 
 $(LIBFT):
 	@$(MAKE) -C ./libft

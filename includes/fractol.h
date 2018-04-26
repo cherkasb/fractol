@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:13:41 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/04/25 19:41:09 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/04/26 19:47:56 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,25 @@
 # define FRACTOL_H
 
 # define MAP_LEN 1240
+# define MAX_THREADS 1
 
 # include "libft.h"
 # include "ft_printf.h"
 # include <mlx.h>
 # include <math.h>
+# include <pthread.h>
 
 /*
 ** im - y - width, re - x - lengh
 */
+
+typedef struct		s_wrapper
+{
+	struct s_info	*inf;
+	ssize_t			max_i;
+	ssize_t			i;
+	int				threaded;
+}					t_wrapper;
 
 typedef struct		s_complex
 {
@@ -51,7 +61,6 @@ typedef struct		s_info
 void				mandelbrot(t_info *inf);
 
 void				init_inf(t_info *inf);
-void				init_mandel(t_info *inf, t_complex *cpl);
 
 int					triggers(int key, void *elem);
 int					escapewindow(t_info *inf);
