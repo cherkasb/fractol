@@ -6,13 +6,13 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:00:22 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/04/26 19:25:05 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/04/28 20:32:55 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	thefunc(t_info *inf, t_complex *cpl, size_t i, size_t j)
+static void	thefunc(t_info *inf, t_complex *cpl, int *pixel)
 {
 	int			n;
 	t_complex	save;
@@ -31,34 +31,28 @@ static void	thefunc(t_info *inf, t_complex *cpl, size_t i, size_t j)
 		save.re = tmp.re - tmp.im + cpl->re;
 		n++;
 	}
-//	printf("X: %zd, Y: %zd, inside: %d\n, re: %g, im: %g\n", i, j, is_inside, cpl->re, cpl->im);
-	mlx_pixel_put(inf->mlxptr, inf->winptr, j, i, dark_red_white(n , inf->mlb.max_iter));
+	*pixel = dark_red_white(n, inf->mlb.max_iter);
 }
 
 void		*parallel(void *el)
 {
 	t_wrapper		*wrap;
-	t_info			*inf;
 	t_complex		cpl;
 	ssize_t			j;
+	ssize_t			i;
 
-	wrap = (t_wrapper *)el;
-	ft_printf("START: %ld\n", wrap->i);
-	inf = wrap->inf;
+	i = 0;
 	j = 0;
-	while (wrap->i < wrap->max_i)
+	wrap = (t_wrapper *)el;
+	while (wrap->start < wrap->end)
 	{
-		cpl.im = inf->mlb.max_y - wrap->i * inf->mlb.rel_x;
-		while (j < MAP_LEN)
-		{
-			cpl.re = inf->mlb.min_x + j * inf->mlb.rel_y;
-			thefunc(inf, &cpl, wrap->i, j);
-			j++;
-		}
-		j = 0;
-		wrap->i++;
+		i = wrap->start / MAP_LEN;
+		j = wrap->start % MAP_LEN;
+		cpl.im = wrap->inf->mlb.max_y - i * wrap->inf->mlb.rel_x;
+		cpl.re = wrap->inf->mlb.min_x + j * wrap->inf->mlb.rel_y;
+		thefunc(wrap->inf, &cpl, wrap->arr + wrap->start);
+		wrap->start++;
 	}
-	ft_printf("END: %ld\n", wrap->i);
 	if (wrap->threaded)
 		pthread_exit(0);
 	return (NULL);
@@ -70,8 +64,9 @@ t_wrapper	wrap_init(t_info *inf, int index, int threaded)
 
 	wrap.threaded = threaded;
 	wrap.inf = inf;
-	wrap.i = MAP_LEN / MAX_THREADS * index;
-	wrap.max_i = MAP_LEN / MAX_THREADS * (index + 1);
+	wrap.start = inf->img.img_mass / MAX_THREADS * index;
+	wrap.arr = inf->img.img_arr;
+	wrap.end = inf->img.img_mass / MAX_THREADS * (index + 1);
 	return (wrap);
 }
 
@@ -82,6 +77,7 @@ void		mandelbrot(t_info *inf)
 	pthread_t		th[MAX_THREADS - 1];
 	int				index;
 
+	inf->draw_func = mandelbrot;
 	index = 0;
 	while (index < MAX_THREADS - 1)
 	{
@@ -92,11 +88,12 @@ void		mandelbrot(t_info *inf)
 		index++;
 	}
 	wrap[MAX_THREADS - 1] = wrap_init(inf, MAX_THREADS - 1, 0);
-	parallel(&(wrap[0]));
+	parallel(&(wrap[index]));
 	index = 0;
 	while (index < MAX_THREADS - 1)
 	{
 		pthread_join(th[index],NULL);
 		index++;
 	}
+	mlx_put_image_to_window(inf->mlxptr, inf->winptr, inf->img.img_ptr, 0, 0);
 }

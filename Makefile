@@ -6,7 +6,7 @@
 #    By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/24 17:06:27 by bcherkas          #+#    #+#              #
-#    Updated: 2018/04/26 19:08:01 by bcherkas         ###   ########.fr        #
+#    Updated: 2018/04/28 20:24:42 by bcherkas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ MLX=-I/usr/local/include -L/usr/local/lib -lmlx -framework OpenGL -framework App
 
 LIBFT=./libft/libft.a
 
-SRC=fractol.c triggers.c escapewindow.c init.c mandelbrot.c color.c
+SRC=fractol.c triggers.c escapewindow.c mandelbrot.c color.c errors.c mouse_events.c
 
 SRCS=$(addprefix ./srcs/, $(SRC))
 

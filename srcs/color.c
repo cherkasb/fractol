@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 19:23:22 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/04/26 18:51:20 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/04/28 17:29:35 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		dark_red_white(int coef, int max)
 	blue = 0;
 	red = 255;
 	if (coef == max)
-		return (0xFFFFFF);
+		return (0);
 	if (coef > max / 2)
 	{
 		green = 255 / max * coef;
@@ -33,6 +33,6 @@ int		dark_red_white(int coef, int max)
 	}
 	else if (coef < max / 2)
 		return (0);
-	clr = (red * 256 * 256) + (green * 256) + blue;
+	clr = (red << 16) + (green << 8) + blue;
 	return (clr);
 }
