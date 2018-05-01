@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:37:17 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/04/28 19:22:38 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/01 16:51:50 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 static int	move(int key, t_info *inf)
 {
+	double	el;
 	double	y;
 	double	x;
 
+	el = ABS((inf->mlb.max_y - inf->mlb.min_y) / 20.0);
 	x = 0;
 	y = 0;
 	if (key == 123)
-		x = 0.04;
+		x = el;
 	else if (key == 124)
-		x = -0.04;
+		x = -el;
 	else if (key == 125)
-		y = 0.04;
+		y = el;
 	else if (key == 126)
-		y = -0.04;
+		y = -el;
 	inf->mlb.max_y += y;
 	inf->mlb.min_y += y;
 	inf->mlb.max_x += x;
@@ -37,20 +39,11 @@ static int	move(int key, t_info *inf)
 
 static int	reset(t_info *inf)
 {
-	inf->mlb.max_x = 1;
-	inf->mlb.min_x = -2.0;
-	inf->mlb.min_y = -1.2;
-	inf->mlb.max_y = inf->mlb.min_y + (inf->mlb.max_x - inf->mlb.min_x);
-	inf->mlb.rel_x = (inf->mlb.max_x - inf->mlb.min_x) /
-		(double)(MAP_LEN - 1);
-	inf->mlb.rel_y = (inf->mlb.max_y - inf->mlb.min_y) /
-		(double)(MAP_LEN - 1);
-	inf->mlb.max_iter = 30;
-	inf->draw_func(inf);
+	inf->wrap_func(inf);
 	return (1);
 }
 
-static int change_iter(int key, t_info *inf)
+static int	change_iter(int key, t_info *inf)
 {
 	int		i;
 
@@ -59,6 +52,16 @@ static int change_iter(int key, t_info *inf)
 	i = (key == 78) ? -1 : 1;
 	inf->mlb.max_iter += i;
 	inf->draw_func(inf);
+	return (1);
+}
+
+static int	fix_pos(t_info *inf)
+{
+	if (inf->draw_func != julia)
+		return (0);
+	(inf->fixed)++;
+	if (inf->fixed == 2)
+		inf->fixed = 0;
 	return (1);
 }
 
@@ -74,6 +77,9 @@ int			triggers(int key, void *elem)
 	else if (key == 15)
 		return (reset(inf));
 	else if (key == 78 || key == 69)
-		change_iter(key, inf);
-	return (0);
+		return (change_iter(key, inf));
+	else if (key == 3)
+		return (fix_pos(inf));
+	else
+		return (triggers2(key, inf));
 }

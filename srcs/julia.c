@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:00:22 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/01 17:09:24 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/01 16:11:08 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void			thefunc(t_info *inf, t_complex *cpl, int *pixel)
+static void		thefunc(t_info *inf, t_complex *cpl, int *pixel)
 {
 	int			n;
 	t_complex	save;
@@ -27,14 +27,14 @@ static void			thefunc(t_info *inf, t_complex *cpl, int *pixel)
 		tmp.im = save.im * save.im;
 		if ((tmp.re + tmp.im) > 4)
 			break ;
-		save.im = 2.0 * save.re * save.im + cpl->im;
-		save.re = tmp.re - tmp.im + cpl->re;
+		save.im = 2 * save.re * save.im + inf->julia.im;
+		save.re = tmp.re - tmp.im + inf->julia.re;
 		n++;
 	}
 	*pixel = dark_red_white(n, inf->mlb.max_iter);
 }
 
-static void			*parallel(void *el)
+static void		*parallel(void *el)
 {
 	t_wrap		*wrap;
 	t_complex		cpl;
@@ -70,13 +70,14 @@ static t_wrap	wrap_init(t_info *inf, int index, int threaded)
 	return (wrap);
 }
 
-void				mandelbrot(t_info *inf)
+void			julia(t_info *inf)
 {
 	pthread_attr_t	attr;
 	t_wrap			wrap[MAX_THREADS];
 	pthread_t		th[MAX_THREADS - 1];
 	int				index;
 
+	inf->draw_func = julia;
 	index = 0;
 	while (index < MAX_THREADS - 1)
 	{
@@ -97,18 +98,21 @@ void				mandelbrot(t_info *inf)
 	mlx_put_image_to_window(inf->mlxptr, inf->winptr, inf->img.img_ptr, 0, 0);
 }
 
-void				mandelbrot_wrap(t_info *inf)
+void			julia_wrap(t_info *inf)
 {
-	inf->draw_func = mandelbrot;
-	inf->wrap_func = mandelbrot_wrap;
-	inf->mlb.max_x = 1;
-	inf->mlb.min_x = -2.0;
-	inf->mlb.min_y = -1.2;
+	inf->fixed = 0;
+	inf->julia.im = 0.288;
+	inf->julia.re = 0.353;
+	inf->draw_func = julia;
+	inf->wrap_func = julia_wrap;
+	inf->mlb.max_x = 1.8;
+	inf->mlb.min_x = -1.8;
+	inf->mlb.min_y = -1.8;
 	inf->mlb.max_y = inf->mlb.min_y + (inf->mlb.max_x - inf->mlb.min_x);
 	inf->mlb.rel_x = (inf->mlb.max_x - inf->mlb.min_x) /
 		(double)(MAP_LEN - 1);
 	inf->mlb.rel_y = (inf->mlb.max_y - inf->mlb.min_y) /
 		(double)(MAP_LEN - 1);
-	inf->mlb.max_iter = 30;
-	mandelbrot(inf);
+	inf->mlb.max_iter = 35;
+	julia(inf);
 }

@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:05:16 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/04/28 20:25:14 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/01 18:55:35 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,12 @@ static void		init(t_info *inf)
 {
 	inf->mlxptr = NULL;
 	inf->winptr = NULL;
-	inf->mlb.max_x = 1;
-	inf->mlb.min_x = -2.0;
-	inf->mlb.min_y = -1.2;
-	inf->mlb.max_y = inf->mlb.min_y + (inf->mlb.max_x - inf->mlb.min_x);
-	inf->mlb.rel_x = (inf->mlb.max_x - inf->mlb.min_x) /
-		(double)(MAP_LEN - 1);
-	inf->mlb.rel_y = (inf->mlb.max_y - inf->mlb.min_y) /
-		(double)(MAP_LEN - 1);
-	inf->mlb.max_iter = 30;
+	inf->funcs[0].func = mandelbrot_wrap;
+	inf->funcs[1].func = julia_wrap;
+	inf->funcs[2].func = tricorn_wrap;
+	inf->funcs[3].func = heart_mandelbrot_wrap;
+	inf->funcs[4].func = perp_mandel_wrap;
+	inf->funcs[5].func = burn_ship_wrap;
 }
 
 static void		create_image(t_info *inf)
@@ -47,16 +44,16 @@ static void		bind(t_info *inf)
 	winp = inf->winptr;
 	mlx_hook(winp, 17, 1L << 17, exitwindow, (void *)inf);
 	mlx_hook(winp, 2, 5, triggers, (void *)inf);
+	mlx_hook(winp, 6, 0, mouse_julia, (void *)inf);
 	mlx_mouse_hook(winp, mouse_events, (void *)inf);
 }
 
-static void		graphics(t_info *inf, char *name)
+static void		graphics(t_info *inf)
 {
 	inf->mlxptr = mlx_init();
 	inf->winptr = mlx_new_window(inf->mlxptr, MAP_LEN, MAP_LEN, "Fractol");
 	create_image(inf);
-	if (ft_strequ(name, "Mandelbrot"))
-		mandelbrot(inf);
+	inf->wrap_func(inf);
 	bind(inf);
 	mlx_loop(inf->mlxptr);
 }
@@ -67,10 +64,9 @@ int				main(int ac, char **av)
 
 	if (ac != 2)
 		usage();
-	if (ft_strequ(av[1], "names"))
+	str_to_lower(av[1]);
+	if (!check_if_valid(&inf, av[1]))	
 		fractal_names();
-	if (!ft_strequ(av[1], "Mandelbrot") && !ft_strequ(av[1], "Julia"))
-		name_error();
 	init(&inf);
-	graphics(&inf, av[1]);
+	graphics(&inf);
 }

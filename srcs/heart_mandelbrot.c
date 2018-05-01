@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:00:22 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/01 17:09:24 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:52:05 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void			thefunc(t_info *inf, t_complex *cpl, int *pixel)
 		tmp.im = save.im * save.im;
 		if ((tmp.re + tmp.im) > 4)
 			break ;
-		save.im = 2.0 * save.re * save.im + cpl->im;
+		save.im = 2.0 * ABS(save.re) * save.im + cpl->im;
 		save.re = tmp.re - tmp.im + cpl->re;
 		n++;
 	}
@@ -70,7 +70,7 @@ static t_wrap	wrap_init(t_info *inf, int index, int threaded)
 	return (wrap);
 }
 
-void				mandelbrot(t_info *inf)
+void				heart_mandelbrot(t_info *inf)
 {
 	pthread_attr_t	attr;
 	t_wrap			wrap[MAX_THREADS];
@@ -97,10 +97,10 @@ void				mandelbrot(t_info *inf)
 	mlx_put_image_to_window(inf->mlxptr, inf->winptr, inf->img.img_ptr, 0, 0);
 }
 
-void				mandelbrot_wrap(t_info *inf)
+void				heart_mandelbrot_wrap(t_info *inf)
 {
-	inf->draw_func = mandelbrot;
-	inf->wrap_func = mandelbrot_wrap;
+	inf->draw_func = heart_mandelbrot;
+	inf->wrap_func = heart_mandelbrot_wrap;
 	inf->mlb.max_x = 1;
 	inf->mlb.min_x = -2.0;
 	inf->mlb.min_y = -1.2;
@@ -110,5 +110,5 @@ void				mandelbrot_wrap(t_info *inf)
 	inf->mlb.rel_y = (inf->mlb.max_y - inf->mlb.min_y) /
 		(double)(MAP_LEN - 1);
 	inf->mlb.max_iter = 30;
-	mandelbrot(inf);
+	heart_mandelbrot(inf);
 }
