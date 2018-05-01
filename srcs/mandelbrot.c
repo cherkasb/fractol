@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:00:22 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/01 17:09:24 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:27:56 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void				mandelbrot(t_info *inf)
 	int				index;
 
 	index = 0;
+	pthread_attr_init(&attr);
 	while (index < MAX_THREADS - 1)
 	{
-		pthread_attr_init(&attr);
 		wrap[index] = wrap_init(inf, index, 1);
 		if (pthread_create(&(th[index]), &attr, parallel, &(wrap[index])))
 			exit(0);
