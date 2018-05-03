@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:05:16 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/02 19:58:59 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/03 16:43:55 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,9 @@ int				main(int ac, char **av)
 	if (ac != 2)
 		usage();
 	str_to_lower(av[1]);
-	if (!check_if_valid(&inf, av[1]))	
+	if (!check_if_valid(&inf, av[1]))
 		usage();
 	init(&inf);
 	graphics(&inf);
 	return (0);
 }
-

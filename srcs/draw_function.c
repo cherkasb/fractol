@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 15:55:12 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/02 17:12:21 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/03 16:43:16 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void				draw_function(t_info *inf)
 	index = 0;
 	while (index < MAX_THREADS - 1)
 	{
-		pthread_join(th[index],NULL);
+		pthread_join(th[index], NULL);
 		index++;
 	}
 	mlx_put_image_to_window(inf->mlxptr, inf->winptr, inf->img.img_ptr, 0, 0);

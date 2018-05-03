@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 19:58:33 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/02 18:45:14 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/03 16:42:46 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		mouse_zoom(int button, int x, int y, t_info *inf)
 int		mouse_julia(int x, int y, void *p)
 {
 	t_complex	*jul;
-	t_info 		*inf;
+	t_info		*inf;
 
 	inf = (t_info *)p;
 	if (inf->draw_func != julia || inf->fixed == 1)
