@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:37:17 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/01 16:51:50 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:55:01 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	move(int key, t_info *inf)
 	inf->mlb.min_y += y;
 	inf->mlb.max_x += x;
 	inf->mlb.min_x += x;
-	inf->draw_func(inf);
+	draw_function(inf);
 	return (1);
 }
 
@@ -51,7 +51,7 @@ static int	change_iter(int key, t_info *inf)
 		return (1);
 	i = (key == 78) ? -1 : 1;
 	inf->mlb.max_iter += i;
-	inf->draw_func(inf);
+	draw_function(inf);
 	return (1);
 }
 

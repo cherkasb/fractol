@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 18:24:34 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/01 18:54:51 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/02 20:01:56 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ void		str_to_lower(char *str)
 	}
 }
 
-void		fractal_names(void)
+void		usage(void)
 {
+	ft_dprintf(2, "Usage: ./fractol \"fractal name\"\n");
 	ft_dprintf(2, "\t{bold}Fractal names:\n");
 	ft_dprintf(2, "\t-{green}Mandelbrot\n");
 	ft_dprintf(2, "\t-{green}Julia\n");
@@ -52,11 +53,14 @@ void		fractal_names(void)
 	ft_dprintf(2, "\t-{green}Mandelheart\n");
 	ft_dprintf(2, "\t-{green}Perpendicular mandelbrot\n");
 	ft_dprintf(2, "\t-{green}Burning ship\n");
+	ft_dprintf(2, "{bold}There are some key binds");
+	ft_dprintf(2, "{bold} that may be useful for you:\n");
+	ft_dprintf(2, "{italic}Use \'[\' and \']\' to change fractal\n");
+	ft_dprintf(2, "{italic}Use mouse wheel to zoom or reduce image\n");
+	ft_dprintf(2, "{italic}Use numbers 1 - 4 to change colors\n");
+	ft_dprintf(2, "{italic}Use \'-\' and \'=\' to change color features\n");
+	ft_dprintf(2, "{italic}Use \'+\' and \'-\' to");
+	ft_dprintf(2, "{italic} change number of iterations\n");
+	ft_dprintf(2, "{italic}Use \'f\' to fix position for Julia\n");
 	exit(0);
-}
-
-void		usage(void)
-{
-	ft_dprintf(2, "Usage: ./fractol \"fractal name\"\n");	
-	fractal_names();
 }

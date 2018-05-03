@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:05:16 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/01 18:55:35 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/02 19:58:59 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ static void		init(t_info *inf)
 {
 	inf->mlxptr = NULL;
 	inf->winptr = NULL;
+	inf->color_func = red_colored;
+	inf->white_center = 0;
+	inf->color_part = 1;
 	inf->funcs[0].func = mandelbrot_wrap;
 	inf->funcs[1].func = julia_wrap;
 	inf->funcs[2].func = tricorn_wrap;
@@ -66,7 +69,9 @@ int				main(int ac, char **av)
 		usage();
 	str_to_lower(av[1]);
 	if (!check_if_valid(&inf, av[1]))	
-		fractal_names();
+		usage();
 	init(&inf);
 	graphics(&inf);
+	return (0);
 }
+

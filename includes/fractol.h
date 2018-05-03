@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:13:41 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/01 19:08:13 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/02 19:58:42 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ typedef struct		s_complex
 	double			im;
 	double			re;
 }					t_complex;
+
+typedef struct		s_rgb
+{
+	int				red;
+	int				green;
+	int				blue;
+	int				clr;
+}					t_rgb;
 
 typedef struct		s_coord
 {
@@ -81,6 +89,10 @@ typedef struct		s_info
 	t_complex		julia;
 	int				fixed;
 	t_fun			funcs[FRACTAL_NUMBER];
+	int				(*color_func)();
+	int				zoom_save;
+	int				white_center;
+	int				color_part;
 }					t_info;
 
 void				mandelbrot_wrap(t_info *inf);
@@ -90,12 +102,16 @@ void				heart_mandelbrot_wrap(t_info *inf);
 void				perp_mandel_wrap(t_info *inf);
 void				burn_ship_wrap(t_info *inf);
 
-void				mandelbrot(t_info *inf);
-void				julia(t_info *inf);
-void				tricorn(t_info *inf);
-void				heart_mandelbrot(t_info *inf);
-void				perp_mandel(t_info *inf);
-void				burn_ship(t_info *inf);
+void				mandelbrot(t_info *inf, t_complex *cpl, int *pixel);
+void				julia(t_info *inf, t_complex *cpl, int *pixel);
+void				tricorn(t_info *inf, t_complex *cpl, int *pixel);
+void				heart_mandelbrot(t_info *inf, t_complex *cpl, int *pixel);
+void				perp_mandel(t_info *inf, t_complex *cpl, int *pixel);
+void				burn_ship(t_info *inf, t_complex *cpl, int *pixel);
+
+void				*parallel(void *el);
+t_wrap				wrap_init(t_info *inf, int index, int threaded);
+void				draw_function(t_info *inf);
 
 int					mouse_events(int button, int x, int y, void *p);
 int					mouse_julia(int x, int y, void *p);
@@ -105,11 +121,13 @@ int					triggers2(int key, t_info *inf);
 int					escapewindow(t_info *inf);
 int					exitwindow(void *elem);
 
-int					dark_red_white(int coef, int max);
+int					red_colored(t_info *inf, int coef, int max);
+int					green_colored(t_info *inf, int coef, int max);
+int					white_colored(t_info *inf, int coef, int max);
+int					three_colored(t_info *inf, int coef, int max);
 
 void				usage(void);
 int					check_if_valid(t_info *inf, char *str);
 void				str_to_lower(char *str);
-void				fractal_names(void);
 
 #endif

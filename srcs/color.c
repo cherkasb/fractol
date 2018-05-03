@@ -6,37 +6,108 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 19:23:22 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/01 19:18:45 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/02 19:36:25 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		dark_red_white(int coef, int max)
+int		red_colored(t_info *inf, int coef, int max)
 {
-	int		clr;
-	int		red;
-	int		green;
-	int		blue;
+	t_rgb	rgb;
 
-	green = 0;
-	blue = 0;
-	red = 255;
-	if (coef == max)
+	rgb.green = 0;
+	rgb.blue = 0;
+	rgb.red = 0;
+	if (max == coef && inf->white_center == 0)
+		return (0);
+	else if (max == coef && inf->white_center)
 		return (0xFFFFFF);
-	if (max > 75)
-		max -= (max / 75) * 20;
 	if (coef > max / 2)
 	{
-		green = 255 / max * coef;
-		blue = 255 / max * coef;
+		rgb.red = 255;
+		rgb.green = 255 / max * coef;
+		rgb.blue = 255 / max * coef;
 	}
-	else
+	else if (inf->color_part)
+		rgb.red = 255 / max * coef;
+	rgb.clr = (rgb.red << 16) + (rgb.green << 8) + rgb.blue;
+	return (rgb.clr);
+}
+
+int		green_colored(t_info *inf, int coef, int max)
+{
+	t_rgb	rgb;
+
+	rgb.green = 0;
+	rgb.blue = 0;
+	rgb.red = 0;
+	if (max == coef && inf->white_center == 0)
+		return (0);
+	else if (max == coef && inf->white_center)
+		return (0xFFFFFF);
+	if (coef > max / 2)
 	{
-		red = 0;
-	//	blue = 255 / max * coef;
-	//	red = 0;
+		rgb.green = 255;
+		rgb.red = 255 / max * coef;
+		rgb.blue = 255 / max * coef;
 	}
-	clr = (red << 16) + (green << 8) + blue;
-	return (clr);
+	else if (inf->color_part)
+		rgb.green = 255 / max * coef;
+	rgb.clr = (rgb.red << 16) + (rgb.green << 8) + rgb.blue;
+	return (rgb.clr);
+}
+
+int		white_colored(t_info *inf, int coef, int max)
+{
+	t_rgb	rgb;
+
+	rgb.green = 0;
+	rgb.blue = 0;
+	rgb.red = 0;
+	if (max == coef && inf->white_center == 0)
+		return (0);
+	else if (max == coef && inf->white_center)
+		return (0xFFFFFF);
+	if (coef > max / 2)
+	{
+		rgb.green = 255 / max * coef;
+		rgb.red = 255 / max * coef;
+		rgb.blue = 255 / max * coef;
+	}
+	else if (inf->color_part)
+	{
+		rgb.red = 255 / max * coef;
+		rgb.blue = 255 / max * coef;
+		rgb.green = 255 / max * coef;
+	}
+	rgb.clr = (rgb.red << 16) + (rgb.green << 8) + rgb.blue;
+	return (rgb.clr);
+}
+
+int		three_colored(t_info *inf, int coef, int max)
+{
+	t_rgb	rgb;
+
+	rgb.red = 228;
+	rgb.green = 172;
+	rgb.blue = 113;
+	if (max == coef && inf->white_center == 0)
+		return (0);
+	else if (max == coef && inf->white_center)
+		return (0xFFFFFF);
+	if (coef > max / 2)
+	{
+		rgb.green = rgb.green / max * coef;
+		rgb.red = rgb.red / max * coef;
+		rgb.blue = rgb.blue / max * coef;
+	}
+	else if (inf->color_part)
+	{
+		rgb.red = rgb.red / max * coef;
+		rgb.blue = rgb.blue / max * coef;
+		rgb.green = rgb.green / max * coef;
+	}
+	rgb.clr = (rgb.red << 16) + (rgb.green << 8) + rgb.blue;
+	return (rgb.clr);
 }
