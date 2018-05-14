@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 15:55:12 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/03 16:43:16 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/14 19:41:26 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,14 @@ void				*parallel(void *el)
 		wrap->inf->draw_func(wrap->inf, &cpl, wrap->arr + wrap->start);
 		wrap->start++;
 	}
-	if (wrap->threaded)
-		pthread_exit(0);
+	pthread_exit(0);
 	return (NULL);
 }
 
-t_wrap				wrap_init(t_info *inf, int index, int threaded)
+t_wrap				wrap_init(t_info *inf, int index)
 {
 	t_wrap	wrap;
 
-	wrap.threaded = threaded;
 	wrap.inf = inf;
 	wrap.start = inf->img.img_mass / MAX_THREADS * index;
 	wrap.arr = inf->img.img_arr;
@@ -54,23 +52,25 @@ void				draw_function(t_info *inf)
 	t_wrap			wrap[MAX_THREADS];
 	pthread_t		th[MAX_THREADS - 1];
 	int				index;
+	char			*str;
 
+	mlx_clear_window(inf->mlxptr, inf->winptr);
 	index = 0;
 	pthread_attr_init(&attr);
-	while (index < MAX_THREADS - 1)
+	while (index < MAX_THREADS)
 	{
-		wrap[index] = wrap_init(inf, index, 1);
-		if (pthread_create(&(th[index]), &attr, parallel, &(wrap[index])))
-			exit(0);
+		wrap[index] = wrap_init(inf, index);
+		pthread_create(&(th[index]), &attr, parallel, &(wrap[index]));
 		index++;
 	}
-	wrap[MAX_THREADS - 1] = wrap_init(inf, MAX_THREADS - 1, 0);
-	parallel(&(wrap[index]));
 	index = 0;
-	while (index < MAX_THREADS - 1)
+	while (index < MAX_THREADS)
 	{
 		pthread_join(th[index], NULL);
 		index++;
 	}
 	mlx_put_image_to_window(inf->mlxptr, inf->winptr, inf->img.img_ptr, 0, 0);
+	str = ft_itoa(inf->mlb.max_iter);
+	mlx_string_put(inf->mlxptr, inf->winptr, 0, 0, 0xFFFFFF, str);
+	ft_strdel(&str);
 }

@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:05:16 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/03 16:43:55 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/14 20:25:46 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void		init(t_info *inf)
 	inf->funcs[3].func = heart_mandelbrot_wrap;
 	inf->funcs[4].func = perp_mandel_wrap;
 	inf->funcs[5].func = burn_ship_wrap;
+	inf->funcs[6].func = julia_ext_wrap;
 }
 
 static void		create_image(t_info *inf)
@@ -38,36 +39,30 @@ static void		create_image(t_info *inf)
 			&(inf->img.pixel_mass), &(inf->img.line_mass), &(inf->img.endi));
 }
 
-static void		bind(t_info *inf)
+static void		*graphics(void *p)
 {
-	void	*mlxp;
-	void	*winp;
+	t_info *inf;
 
-	mlxp = inf->mlxptr;
-	winp = inf->winptr;
-	mlx_hook(winp, 17, 1L << 17, exitwindow, (void *)inf);
-	mlx_hook(winp, 2, 5, triggers, (void *)inf);
-	mlx_hook(winp, 6, 0, mouse_julia, (void *)inf);
-	mlx_mouse_hook(winp, mouse_events, (void *)inf);
-}
-
-static void		graphics(t_info *inf)
-{
+	inf = (t_info *)p;
 	inf->mlxptr = mlx_init();
 	inf->winptr = mlx_new_window(inf->mlxptr, MAP_LEN, MAP_LEN, "Fractol");
 	create_image(inf);
+	mlx_hook(inf->winptr, 17, 1L << 17, exitwindow, (void *)inf);
+	mlx_hook(inf->winptr, 2, 5, triggers, (void *)inf);
+	mlx_hook(inf->winptr, 6, 0, mouse_julia, (void *)inf);
+	mlx_mouse_hook(inf->winptr, mouse_events, (void *)inf);
 	inf->wrap_func(inf);
-	bind(inf);
 	mlx_loop(inf->mlxptr);
+	return (NULL);
 }
 
 int				main(int ac, char **av)
 {
-	t_info	inf;
+	t_info inf;
 
 	if (ac != 2)
 		usage();
-	str_to_lower(av[1]);
+	str_to_lower(av);
 	if (!check_if_valid(&inf, av[1]))
 		usage();
 	init(&inf);

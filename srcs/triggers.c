@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:37:17 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/02 17:55:01 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/14 20:28:43 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static int	change_iter(int key, t_info *inf)
 {
 	int		i;
 
-	if (key == 78 && inf->mlb.max_iter < 16)
+	if (key == 78 && inf->mlb.max_iter < 30)
 		return (1);
-	i = (key == 78) ? -1 : 1;
+	i = (key == 78) ? -5 : 5;
 	inf->mlb.max_iter += i;
 	draw_function(inf);
 	return (1);
@@ -57,7 +57,7 @@ static int	change_iter(int key, t_info *inf)
 
 static int	fix_pos(t_info *inf)
 {
-	if (inf->draw_func != julia)
+	if (inf->draw_func != julia || inf->draw_func != julia_ext)
 		return (0);
 	(inf->fixed)++;
 	if (inf->fixed == 2)

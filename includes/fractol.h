@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:13:41 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/02 19:58:42 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/14 21:07:40 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define MAP_LEN 1240
 # define MAX_THREADS 32
-# define FRACTAL_NUMBER 6
+# define FRACTAL_NUMBER 7
 # define ABS(x) ((x) < 0 ? -(x) : (x))
 
 # include "libft.h"
@@ -34,7 +34,6 @@ typedef struct		s_wrapper
 	int				*arr;
 	ssize_t			start;
 	ssize_t			end;
-	int				threaded;
 }					t_wrap;
 
 typedef struct		s_complex
@@ -101,6 +100,7 @@ void				tricorn_wrap(t_info *inf);
 void				heart_mandelbrot_wrap(t_info *inf);
 void				perp_mandel_wrap(t_info *inf);
 void				burn_ship_wrap(t_info *inf);
+void				julia_ext_wrap(t_info *inf);
 
 void				mandelbrot(t_info *inf, t_complex *cpl, int *pixel);
 void				julia(t_info *inf, t_complex *cpl, int *pixel);
@@ -108,9 +108,10 @@ void				tricorn(t_info *inf, t_complex *cpl, int *pixel);
 void				heart_mandelbrot(t_info *inf, t_complex *cpl, int *pixel);
 void				perp_mandel(t_info *inf, t_complex *cpl, int *pixel);
 void				burn_ship(t_info *inf, t_complex *cpl, int *pixel);
+void				julia_ext(t_info *inf, t_complex *cpl, int *pixel);
 
 void				*parallel(void *el);
-t_wrap				wrap_init(t_info *inf, int index, int threaded);
+t_wrap				wrap_init(t_info *inf, int index);
 void				draw_function(t_info *inf);
 
 int					mouse_events(int button, int x, int y, void *p);
@@ -128,6 +129,6 @@ int					three_colored(t_info *inf, int coef, int max);
 
 void				usage(void);
 int					check_if_valid(t_info *inf, char *str);
-void				str_to_lower(char *str);
+void				str_to_lower(char **str);
 
 #endif
