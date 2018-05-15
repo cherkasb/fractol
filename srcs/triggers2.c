@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:37:17 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/02 19:36:29 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/15 18:14:01 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	change_color(int key, t_info *inf)
 		inf->color_func = white_colored;
 	else if (key == 21)
 		inf->color_func = three_colored;
+	else if (key == 23)
+		inf->color_func = orange_colored;
 	draw_function(inf);
 	return (1);
 }

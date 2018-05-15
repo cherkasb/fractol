@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:13:41 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/14 21:07:40 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/15 20:13:20 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void				julia_ext(t_info *inf, t_complex *cpl, int *pixel);
 void				*parallel(void *el);
 t_wrap				wrap_init(t_info *inf, int index);
 void				draw_function(t_info *inf);
+void				wrap_help(t_info *inf);
 
 int					mouse_events(int button, int x, int y, void *p);
 int					mouse_julia(int x, int y, void *p);
@@ -122,10 +123,13 @@ int					triggers2(int key, t_info *inf);
 int					escapewindow(t_info *inf);
 int					exitwindow(void *elem);
 
+t_rgb				new_color(int red, int green, int blue);
+
 int					red_colored(t_info *inf, int coef, int max);
 int					green_colored(t_info *inf, int coef, int max);
 int					white_colored(t_info *inf, int coef, int max);
 int					three_colored(t_info *inf, int coef, int max);
+int					orange_colored(t_info *inf, int coef, int max);
 
 void				usage(void);
 int					check_if_valid(t_info *inf, char *str);

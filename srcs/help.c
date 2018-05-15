@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 18:24:34 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/14 20:22:46 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/15 20:18:54 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,12 @@ void		usage(void)
 	ft_dprintf(2, "{italic} change number of iterations\n");
 	ft_dprintf(2, "{italic}Use \'f\' to fix position for Julia\n");
 	exit(0);
+}
+
+void		wrap_help(t_info *inf)
+{
+	inf->zoom_save = 0;
+	inf->mlb.rel_x = (inf->mlb.max_x - inf->mlb.min_x) / (double)(MAP_LEN - 1);
+	inf->mlb.rel_y = (inf->mlb.max_y - inf->mlb.min_y) / (double)(MAP_LEN - 1);
+	inf->mlb.max_iter = 30;
 }

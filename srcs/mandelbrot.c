@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:00:22 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/02 18:10:12 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/15 20:15:03 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,12 @@ void				mandelbrot(t_info *inf, t_complex *cpl, int *pixel)
 
 void				mandelbrot_wrap(t_info *inf)
 {
-	inf->zoom_save = 0;
 	inf->draw_func = mandelbrot;
 	inf->wrap_func = mandelbrot_wrap;
 	inf->mlb.max_x = 1;
 	inf->mlb.min_x = -2.0;
 	inf->mlb.min_y = -1.2;
 	inf->mlb.max_y = inf->mlb.min_y + (inf->mlb.max_x - inf->mlb.min_x);
-	inf->mlb.rel_x = (inf->mlb.max_x - inf->mlb.min_x) /
-		(double)(MAP_LEN - 1);
-	inf->mlb.rel_y = (inf->mlb.max_y - inf->mlb.min_y) /
-		(double)(MAP_LEN - 1);
-	inf->mlb.max_iter = 30;
+	wrap_help(inf);
 	draw_function(inf);
 }

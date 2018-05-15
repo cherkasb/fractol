@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:00:22 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/14 20:43:22 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/15 20:15:51 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void			julia_ext(t_info *inf, t_complex *cpl, int *pixel)
 
 void			julia_ext_wrap(t_info *inf)
 {
-	inf->zoom_save = 0;
 	inf->fixed = 0;
 	inf->julia.im = 0.288;
 	inf->julia.re = 0.353;
@@ -51,10 +50,6 @@ void			julia_ext_wrap(t_info *inf)
 	inf->mlb.min_x = -1.8;
 	inf->mlb.min_y = -1.8;
 	inf->mlb.max_y = inf->mlb.min_y + (inf->mlb.max_x - inf->mlb.min_x);
-	inf->mlb.rel_x = (inf->mlb.max_x - inf->mlb.min_x) /
-		(double)(MAP_LEN - 1);
-	inf->mlb.rel_y = (inf->mlb.max_y - inf->mlb.min_y) /
-		(double)(MAP_LEN - 1);
-	inf->mlb.max_iter = 35;
+	wrap_help(inf);
 	draw_function(inf);
 }
