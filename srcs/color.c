@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:51:20 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/15 20:19:49 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/15 20:54:05 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int		three_colored(t_info *inf, int coef, int max)
 	return (rgb.clr);
 }
 
-int		orange_colored(t_info *inf, int coef, int max)
+int		recursive_colored(t_info *inf, int coef, int max)
 {
 	int		save;
 	t_rgb	rgb;

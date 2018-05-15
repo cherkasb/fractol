@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:05:16 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/14 20:25:46 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/15 21:08:20 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void		init(t_info *inf)
 	inf->color_func = red_colored;
 	inf->white_center = 0;
 	inf->color_part = 1;
+	inf->color_type = 0;
 	inf->funcs[0].func = mandelbrot_wrap;
 	inf->funcs[1].func = julia_wrap;
 	inf->funcs[2].func = tricorn_wrap;

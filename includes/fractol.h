@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:13:41 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/15 20:13:20 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/15 21:06:40 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct		s_info
 	int				zoom_save;
 	int				white_center;
 	int				color_part;
+	int				color_type;
 }					t_info;
 
 void				mandelbrot_wrap(t_info *inf);
@@ -129,6 +130,7 @@ int					red_colored(t_info *inf, int coef, int max);
 int					green_colored(t_info *inf, int coef, int max);
 int					white_colored(t_info *inf, int coef, int max);
 int					three_colored(t_info *inf, int coef, int max);
+int					recursive_colored(t_info *inf, int coef, int max);
 int					orange_colored(t_info *inf, int coef, int max);
 
 void				usage(void);

@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 15:55:12 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/15 20:21:15 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/15 21:06:56 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,8 @@ void				draw_function(t_info *inf)
 	pthread_t		th[MAX_THREADS - 1];
 	int				index;
 
-	if (inf->color_func == orange_colored)
-		inf->mlb.max_iter = 100;
-	else
-		inf->mlb.max_iter = 30;
+	if (inf->color_type == 1)
+		inf->mlb.max_iter += 70;
 	index = 0;
 	pthread_attr_init(&attr);
 	while (index < MAX_THREADS)
@@ -83,4 +81,6 @@ void				draw_function(t_info *inf)
 		index++;
 	}
 	draw_help(inf);
+	if (inf->color_type == 1)
+		inf->mlb.max_iter -= 70;
 }

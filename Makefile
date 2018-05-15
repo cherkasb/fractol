@@ -6,7 +6,7 @@
 #    By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/24 17:06:27 by bcherkas          #+#    #+#              #
-#    Updated: 2018/05/15 18:45:42 by bcherkas         ###   ########.fr        #
+#    Updated: 2018/05/15 20:56:37 by bcherkas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ MLX=-I/usr/local/include -L/usr/local/lib -lmlx -framework OpenGL -framework App
 
 LIBFT=./libft/libft.a
 
-SRC=fractol.c triggers.c triggers2.c escapewindow.c color.c color_help.c help.c draw_function.c mouse_events.c
+SRC=fractol.c triggers.c triggers2.c escapewindow.c color.c color_help.c help.c draw_function.c mouse_events.c colors2.c
 
 SETS=julia.c julia2.c mandelbrot.c tricorn.c heart_mandelbrot.c perpendic_mandel.c burning_ship.c
 
