@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 19:58:33 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/15 19:58:25 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/17 15:55:10 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			mouse_zoom(int b, int x, int y, t_info *inf)
 	double		ms_re;
 	double		ms_im;
 
-	if ((inf->zoom_save == 260 && b == 5) || (inf->zoom_save == -10 && b == 4))
+	if (inf->zoom_save == -10 && b == 4)
 		return (0);
 	inf->zoom_save += (b == 4) ? -1 : 1;
 	zoom = (b == 4) ? 1.05 : 0.95;

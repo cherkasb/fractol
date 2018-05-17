@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:13:41 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/15 21:06:40 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/16 19:44:06 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define MAP_LEN 1240
 # define MAX_THREADS 32
-# define FRACTAL_NUMBER 7
+# define FRACTAL_NUMBER 8
 # define ABS(x) ((x) < 0 ? -(x) : (x))
 
 # include "libft.h"
@@ -102,6 +102,7 @@ void				heart_mandelbrot_wrap(t_info *inf);
 void				perp_mandel_wrap(t_info *inf);
 void				burn_ship_wrap(t_info *inf);
 void				julia_ext_wrap(t_info *inf);
+void				celtic_wrap(t_info *inf);
 
 void				mandelbrot(t_info *inf, t_complex *cpl, int *pixel);
 void				julia(t_info *inf, t_complex *cpl, int *pixel);
@@ -110,6 +111,7 @@ void				heart_mandelbrot(t_info *inf, t_complex *cpl, int *pixel);
 void				perp_mandel(t_info *inf, t_complex *cpl, int *pixel);
 void				burn_ship(t_info *inf, t_complex *cpl, int *pixel);
 void				julia_ext(t_info *inf, t_complex *cpl, int *pixel);
+void				celtic(t_info *inf, t_complex *cpl, int *pixel);
 
 void				*parallel(void *el);
 t_wrap				wrap_init(t_info *inf, int index);

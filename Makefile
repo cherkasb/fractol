@@ -6,7 +6,7 @@
 #    By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/24 17:06:27 by bcherkas          #+#    #+#              #
-#    Updated: 2018/05/15 20:56:37 by bcherkas         ###   ########.fr        #
+#    Updated: 2018/05/16 19:50:54 by bcherkas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT=./libft/libft.a
 
 SRC=fractol.c triggers.c triggers2.c escapewindow.c color.c color_help.c help.c draw_function.c mouse_events.c colors2.c
 
-SETS=julia.c julia2.c mandelbrot.c tricorn.c heart_mandelbrot.c perpendic_mandel.c burning_ship.c
+SETS=julia.c julia2.c mandelbrot.c tricorn.c heart_mandelbrot.c perpendic_mandel.c burning_ship.c celtic.c
 
 SRCS=$(addprefix ./srcs/, $(SRC)) $(addprefix ./srcs/, $(SETS))
 
@@ -36,9 +36,6 @@ $(NAME): $(OBJ) $(LIBFT)
 
 %.o: %.c
 	@$(CC) -c -o $@ -pthread $<
-
-d: $(SRCS) libft/*.c
-	$(CC) $(MLX) -g $^ -o test
 
 $(LIBFT):
 	@$(MAKE) -C ./libft

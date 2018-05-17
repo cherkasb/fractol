@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:05:16 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/15 21:08:20 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/16 18:07:34 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void		init(t_info *inf)
 	inf->funcs[4].func = perp_mandel_wrap;
 	inf->funcs[5].func = burn_ship_wrap;
 	inf->funcs[6].func = julia_ext_wrap;
+	inf->funcs[7].func = celtic_wrap;
 }
 
 static void		create_image(t_info *inf)

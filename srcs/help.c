@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 18:24:34 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/15 21:08:43 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/16 19:45:32 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int			check_if_valid(t_info *inf, char *str)
 		inf->wrap_func = burn_ship_wrap;
 	else if (ft_strequ(str, "double julia"))
 		inf->wrap_func = julia_ext_wrap;
+	else if (ft_strequ(str, "celtic"))
+		inf->wrap_func = celtic_wrap;
 	else
 		return (0);
 	return (1);
@@ -63,11 +65,12 @@ void		usage(void)
 	ft_dprintf(2, "\t-{green}Perpendicular mandelbrot\n");
 	ft_dprintf(2, "\t-{green}Burning ship\n");
 	ft_dprintf(2, "\t-{green}Double julia\n");
+	ft_dprintf(2, "\t-{green}Celtic\n");
 	ft_dprintf(2, "{bold}There are some key binds");
 	ft_dprintf(2, "{bold} that may be useful for you:\n");
 	ft_dprintf(2, "{italic}Use \'[\' and \']\' to change fractal\n");
 	ft_dprintf(2, "{italic}Use mouse wheel to zoom or reduce image\n");
-	ft_dprintf(2, "{italic}Use numbers 1 - 4 to change colors\n");
+	ft_dprintf(2, "{italic}Use numbers 1 - 6 to change colors\n");
 	ft_dprintf(2, "{italic}Use \'-\' and \'=\' to change color features\n");
 	ft_dprintf(2, "{italic}Use \'+\' and \'-\' to");
 	ft_dprintf(2, "{italic} change number of iterations\n");
@@ -80,8 +83,5 @@ void		wrap_help(t_info *inf)
 	inf->zoom_save = 0;
 	inf->mlb.rel_x = (inf->mlb.max_x - inf->mlb.min_x) / (double)(MAP_LEN - 1);
 	inf->mlb.rel_y = (inf->mlb.max_y - inf->mlb.min_y) / (double)(MAP_LEN - 1);
-	if (inf->color_type == 1)
-		inf->mlb.max_iter = 100;
-	else
-		inf->mlb.max_iter = 30;
+	inf->mlb.max_iter = 30;
 }

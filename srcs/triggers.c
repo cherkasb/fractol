@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:37:17 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/14 20:28:43 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/16 19:49:35 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ static int	change_iter(int key, t_info *inf)
 
 static int	fix_pos(t_info *inf)
 {
-	if (inf->draw_func != julia || inf->draw_func != julia_ext)
+	if (inf->draw_func != julia && inf->draw_func != julia_ext)
 		return (0);
-	(inf->fixed)++;
-	if (inf->fixed == 2)
-		inf->fixed = 0;
+	inf->fixed = inf->fixed == 1 ? 0 : 1;
 	return (1);
 }
 

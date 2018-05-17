@@ -6,7 +6,7 @@
 /*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 17:37:17 by bcherkas          #+#    #+#             */
-/*   Updated: 2018/05/15 21:08:04 by bcherkas         ###   ########.fr       */
+/*   Updated: 2018/05/16 19:43:56 by bcherkas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	change_color(int key, t_info *inf)
 		inf->color_func = recursive_colored;
 	else if (key == 22)
 		inf->color_func = orange_colored;
+	else
+		return (0);
 	if (key == 23 || key == 22)
 		inf->color_type = 1;
 	else
