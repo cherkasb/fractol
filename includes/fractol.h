@@ -13,14 +13,20 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define MAP_LEN 1240
+# define MAP_LEN 800
 # define MAX_THREADS 32
 # define FRACTAL_NUMBER 8
 # define ABS(x) ((x) < 0 ? -(x) : (x))
 
+
+# define BUTTON1 49
+# define BUTTON2 50
+# define BUTTON5 53
+
+
 # include "libft.h"
-# include "ft_printf.h"
-# include <mlx.h>
+# include "mlx.h"
+# include "mlx_int.h"
 # include <math.h>
 # include <pthread.h>
 
