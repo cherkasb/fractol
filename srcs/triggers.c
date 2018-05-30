@@ -21,13 +21,13 @@ static int	move(int key, t_info *inf)
 	el = ABS((inf->mlb.max_y - inf->mlb.min_y) / 20.0);
 	x = 0;
 	y = 0;
-	if (key == 123)
+	if (key == ARROW_LEFT)
 		x = el;
-	else if (key == 124)
+	else if (key == ARROW_RIGHT)
 		x = -el;
-	else if (key == 125)
+	else if (key == ARROW_DOWN)
 		y = el;
-	else if (key == 126)
+	else if (key == ARROW_UP)
 		y = -el;
 	inf->mlb.max_y += y;
 	inf->mlb.min_y += y;
@@ -47,9 +47,9 @@ static int	change_iter(int key, t_info *inf)
 {
 	int		i;
 
-	if (key == 78 && inf->mlb.max_iter < 30)
+	if (key == NUMPAD_MIN && inf->mlb.max_iter < 30)
 		return (1);
-	i = (key == 78) ? -5 : 5;
+	i = (key == NUMPAD_MIN) ? -5 : 5;
 	inf->mlb.max_iter += i;
 	draw_function(inf);
 	return (1);
@@ -68,15 +68,15 @@ int			triggers(int key, void *elem)
 	t_info *inf;
 
 	inf = (t_info *)elem;
-	if (key == 53)
+	if (key == KEY_ESCAPE)
 		return (escapewindow(inf));
-	else if (key == 123 || key == 124 || key == 125 || key == 126)
+	else if (key >= ARROW_LEFT && key <= ARROW_DOWN)
 		return (move(key, inf));
-	else if (key == 15)
+	else if (key == KEY_R)
 		return (reset(inf));
-	else if (key == 78 || key == 69)
+	else if (key == NUMPAD_PLUS || key == NUMPAD_MIN)
 		return (change_iter(key, inf));
-	else if (key == 3)
+	else if (key == KEY_F)
 		return (fix_pos(inf));
 	else
 		return (triggers2(key, inf));

@@ -18,12 +18,7 @@
 # define FRACTAL_NUMBER 8
 # define ABS(x) ((x) < 0 ? -(x) : (x))
 
-
-# define BUTTON1 49
-# define BUTTON2 50
-# define BUTTON5 53
-
-
+# include "ubuntu_hook.h"
 # include "libft.h"
 # include "mlx.h"
 # include "mlx_int.h"

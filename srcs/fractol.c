@@ -51,7 +51,7 @@ static void		*graphics(void *p)
 	create_image(inf);
 	mlx_hook(inf->winptr, 17, 1L << 17, exitwindow, (void *)inf);
 	mlx_hook(inf->winptr, 2, 5, triggers, (void *)inf);
-	mlx_hook(inf->winptr, MotionNotify, 0, mouse_julia, (void *)inf);
+	mlx_hook(inf->winptr, 6, 1 << 8, mouse_julia, (void *)inf);
 	mlx_mouse_hook(inf->winptr, mouse_events, (void *)inf);
 	inf->wrap_func(inf);
 	mlx_loop(inf->mlxptr);

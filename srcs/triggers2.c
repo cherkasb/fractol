@@ -33,7 +33,7 @@ static int	change_func(int key, t_info *inf)
 	i = 0;
 	while (inf->funcs[i].func != inf->wrap_func && i < FRACTAL_NUMBER)
 		i++;
-	i += key == 33 ? -1 : 1;
+	i += key == BRACKET_LEFT ? -1 : 1;
 	if (i < 0)
 		i = FRACTAL_NUMBER - 1;
 	else if (i >= FRACTAL_NUMBER)
@@ -44,21 +44,21 @@ static int	change_func(int key, t_info *inf)
 
 static int	change_color(int key, t_info *inf)
 {
-	if (key == 18)
+	if (key == KEY_1)
 		inf->color_func = red_colored;
-	else if (key == 19)
+	else if (key == KEY_2)
 		inf->color_func = green_colored;
-	else if (key == 20)
+	else if (key == KEY_3)
 		inf->color_func = white_colored;
-	else if (key == 21)
+	else if (key == KEY_4)
 		inf->color_func = three_colored;
-	else if (key == 23)
+	else if (key == KEY_5)
 		inf->color_func = recursive_colored;
-	else if (key == 22)
+	else if (key == KEY_6)
 		inf->color_func = orange_colored;
 	else
 		return (0);
-	if (key == 23 || key == 22)
+	if (key == KEY_5 || key == KEY_6)
 		inf->color_type = 1;
 	else
 		inf->color_type = 0;
@@ -68,14 +68,13 @@ static int	change_color(int key, t_info *inf)
 
 int			triggers2(int key, t_info *inf)
 {
-	if (key == 33 || key == 30)
+	if (key == BRACKET_RIGHT || key == BRACKET_LEFT)
 		return (change_func(key, inf));
-	else if ((key >= 18 && key <= 23) || key == 25 || key == 26 || key == 28 ||
-			key == 29)
+	else if (key >= KEY_1 && key <= KEY_6)
 		return (change_color(key, inf));
-	else if (key == 24)
+	else if (key == KEY_PLUS)
 		return (white_center(inf));
-	else if (key == 27)
+	else if (key == KEY_MIN)
 		return (sec_color_part(inf));
 	return (0);
 }
