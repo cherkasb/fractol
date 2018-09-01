@@ -20,6 +20,7 @@
 
 # include "ubuntu_hook.h"
 # include "libft.h"
+# include "ft_printf.h"
 # include "mlx.h"
 # include "mlx_int.h"
 # include <math.h>

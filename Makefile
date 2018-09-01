@@ -14,9 +14,9 @@
 
 CC=clang -Wall -Wextra -Werror -o3
 
-MLX=-lmlx -lXext -lX11 -L./libmlx/ -I./libmlx/ -lm -lpthread
+MLX=-lXext -lX11 -I./libmlx/ -lm -lpthread
 
-HEAD= -I./libmlx -I./includes -I./gnl -I./libft
+HEAD= -I./libmlx -I./includes -I./gnl -I./libft/includes
 
 LIBFT=./libft/libft.a
 
@@ -40,16 +40,15 @@ $(NAME): $(OBJ) $(LIBFT)
 	@$(CC) $(HEAD) -c -o $@ -pthread $<
 
 $(LIBFT):
-	@$(MAKE) -C ./libft
-	@echo "libft compiled"
+	@$(MAKE) --no-print-directory -C ./libft
 
 clean:
 	@rm -f $(OBJ)
-	@$(MAKE) -C ./libft clean
+	@$(MAKE) --no-print-directory -C ./libft clean
 	@echo "clean done"
 
 fclean: clean
 	@rm -f $(NAME)
-	@$(MAKE) -C ./libft fclean
+	@$(MAKE) --no-print-directory -C ./libft fclean
 	@echo "fclean done"
 re: fclean all
