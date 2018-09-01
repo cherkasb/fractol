@@ -56,25 +56,25 @@ void		str_to_lower(char **str)
 
 void		usage(void)
 {
-	ft_dprintf(2, "Usage: ./fractol \"fractal name\"\n");
-	ft_dprintf(2, "\t{bold}Fractal names:\n");
-	ft_dprintf(2, "\t-{green}Mandelbrot\n");
-	ft_dprintf(2, "\t-{green}Julia\n");
-	ft_dprintf(2, "\t-{green}Tricorn\n");
-	ft_dprintf(2, "\t-{green}Mandelheart\n");
-	ft_dprintf(2, "\t-{green}Perpendicular mandelbrot\n");
-	ft_dprintf(2, "\t-{green}Burning ship\n");
-	ft_dprintf(2, "\t-{green}Double julia\n");
-	ft_dprintf(2, "\t-{green}Celtic\n");
-	ft_dprintf(2, "{bold}There are some key binds");
-	ft_dprintf(2, "{bold} that may be useful for you:\n");
-	ft_dprintf(2, "{italic}Use \'[\' and \']\' to change fractal\n");
-	ft_dprintf(2, "{italic}Use mouse wheel to zoom or reduce image\n");
-	ft_dprintf(2, "{italic}Use numbers 1 - 6 to change colors\n");
-	ft_dprintf(2, "{italic}Use \'-\' and \'=\' to change color features\n");
-	ft_dprintf(2, "{italic}Use \'+\' and \'-\' to");
-	ft_dprintf(2, "{italic} change number of iterations\n");
-	ft_dprintf(2, "{italic}Use \'f\' to fix position for Julia\n");
+	ft_putstr("Usage: ./fractol \"fractal name\"\n");
+	ft_putstr("\t{bold}Fractal names:\n");
+	ft_putstr("\t-{green}Mandelbrot\n");
+	ft_putstr("\t-{green}Julia\n");
+	ft_putstr("\t-{green}Tricorn\n");
+	ft_putstr("\t-{green}Mandelheart\n");
+	ft_putstr("\t-{green}Perpendicular mandelbrot\n");
+	ft_putstr("\t-{green}Burning ship\n");
+	ft_putstr("\t-{green}Double julia\n");
+	ft_putstr("\t-{green}Celtic\n");
+	ft_putstr("{bold}There are some key binds");
+	ft_putstr("{bold} that may be useful for you:\n");
+	ft_putstr("{italic}Use \'[\' and \']\' to change fractal\n");
+	ft_putstr("{italic}Use mouse wheel to zoom or reduce image\n");
+	ft_putstr("{italic}Use numbers 1 - 6 to change colors\n");
+	ft_putstr("{italic}Use \'-\' and \'=\' to change color features\n");
+	ft_putstr("{italic}Use \'+\' and \'-\' to");
+	ft_putstr("{italic} change number of iterations\n");
+	ft_putstr("{italic}Use \'f\' to fix position for Julia\n");
 	exit(0);
 }
 

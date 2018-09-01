@@ -12,9 +12,11 @@
 
 .PHONY: all clean fclean re
 
-CC=gcc -Wall -Wextra -Werror -I./libft -I./includes -o3
+CC=clang -Wall -Wextra -Werror -o3
 
-MLX=-I/usr/local/include -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
+MLX=-lmlx -lXext -lX11 -L./libmlx/ -I./libmlx/ -lm -lpthread
+
+HEAD= -I./libmlx -I./includes -I./gnl -I./libft
 
 LIBFT=./libft/libft.a
 
@@ -31,11 +33,11 @@ NAME=fractol
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) -g $(MLX) -o $@ $^
+	@$(CC) $(HEAD) -g $(MLX) -o $@ $^ ./libmlx/libmlx_Linux.a
 	@echo "all done"
 
 %.o: %.c
-	@$(CC) -c -o $@ -pthread $<
+	@$(CC) $(HEAD) -c -o $@ -pthread $<
 
 $(LIBFT):
 	@$(MAKE) -C ./libft
